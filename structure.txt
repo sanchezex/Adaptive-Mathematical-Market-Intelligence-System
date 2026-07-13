@@ -1,0 +1,36 @@
+AMMIS Proposed Code Structure (current scaffold)
+
+./
+  README.md
+  TODO.md
+  pyproject.toml
+
+./ammis/
+  __init__.py
+
+  api/
+    __init__.py
+    main.py              # FastAPI app + health endpoint
+
+  core/
+    __init__.py
+    config.py           # settings placeholder
+
+  models/
+    __init__.py
+    probabilities.py    # probability/vote schemas
+
+  engines/
+    __init__.py
+    market_math/
+      __init__.py
+      aggregator.py     # combines model votes -> overall action/confidence
+
+  risk/
+    __init__.py
+    engine.py           # risk limits + approve stub
+
+  execution/
+    __init__.py
+    broker.py           # execution/paper trading stub
+
