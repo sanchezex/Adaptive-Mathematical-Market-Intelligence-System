@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AMMIS Quick UI</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; }
+      button { margin-right: 8px }
+      pre { background: #f4f4f4; padding: 8px }
+    </style>
+  </head>
+  <body>
+    <h1>AMMIS Quick UI</h1>
+    <div>
+      <button id="health">Health</button>
+      <button id="ingest">Ingest Sample</button>
+      <button id="compute">Compute Probabilities</button>
+    </div>
+    <h3>Response</h3>
+    <pre id="out">(no response yet)</pre>
+
+    <script>
+      async function call(path, opts) {
+        const res = await fetch(path, opts);
+        const text = await res.text();
+        document.getElementById('out').textContent = text;
+      }
+      document.getElementById('health').onclick = () => call('/health');
+      document.getElementById('ingest').onclick = () => call('/ingest', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({symbol:'DEMO', data: [{time: new Date().toISOString(), open:1,high:1,low:1,close:1,volume:0}]})});
+      document.getElementById('compute').onclick = () => call('/compute_probabilities', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({symbol:'DEMO', models:['kronos_adapter'], threshold:10})});
+    </script>
+  </body>
+</html>

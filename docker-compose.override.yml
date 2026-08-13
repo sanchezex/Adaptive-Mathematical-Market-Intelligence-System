@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  backend:
+    environment:
+      # Override AMMIS_RUN_MIGRATIONS to disable automatic migrations in the backend.
+      # Set to '1' to enable migrations, '0' to disable. This file is intended
+      # as a one-shot toggle used with: docker compose -f docker-compose.yml -f docker-compose.override.yml up
+      - AMMIS_RUN_MIGRATIONS=0
